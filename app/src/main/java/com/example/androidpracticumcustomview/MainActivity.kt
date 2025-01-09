@@ -10,7 +10,6 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.ui.graphics.Color
 import com.example.androidpracticumcustomview.ui.theme.CustomContainer
 import com.example.androidpracticumcustomview.ui.theme.MainScreen
 
@@ -38,9 +37,8 @@ class MainActivity : ComponentActivity() {
 
         val layoutParams =
             FrameLayout.LayoutParams(
-                500, 500
-                //ViewGroup.LayoutParams.MATCH_PARENT,
-                //ViewGroup.LayoutParams.MATCH_PARENT
+              //500, 500
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
         layoutParams.gravity = Gravity.CENTER
         customContainer.layoutParams = layoutParams
@@ -49,6 +47,7 @@ class MainActivity : ComponentActivity() {
         rootContainer.setBackgroundColor(getColor(R.color.black))
         rootContainer.addView(customContainer)
 
+        // использование rootContainer необязательно, но так можно протестировать поведение вьюхи при разных размерах
         setContentView(rootContainer)
 
         val firstView = TextView(this).apply {
@@ -57,7 +56,7 @@ class MainActivity : ComponentActivity() {
         }
 
         val secondView = TextView(this).apply {
-            text = "second text"
+            text = "second text\nsecond text\nsecond text"
             setBackgroundColor(getColor(R.color.teal_200))
         }
 

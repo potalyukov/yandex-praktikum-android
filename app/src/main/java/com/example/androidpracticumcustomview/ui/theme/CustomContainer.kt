@@ -53,7 +53,6 @@ class CustomContainer @JvmOverloads constructor(
             desiredHeight += child.measuredHeight
         }
 
-        // Устанавливаем размер ViewGroup
         setMeasuredDimension(
             resolveSize(desiredWidth, widthMeasureSpec),
             resolveSize(desiredHeight, heightMeasureSpec)
@@ -64,6 +63,21 @@ class CustomContainer @JvmOverloads constructor(
         if (childCount == 2) {
             throw IllegalStateException("CustomContainer can have two elements max")
         }
+
         super.addView(child)
+
+        child.alpha = 0f
+
+        child.post {
+            val originalY = child.y
+            child.y = height / 2f - child.height / 2f
+            child
+                .animate()
+                .y(originalY)
+                .alpha(1f)
+                .setDuration(2000)
+                .start()
+        }
+
     }
 }
