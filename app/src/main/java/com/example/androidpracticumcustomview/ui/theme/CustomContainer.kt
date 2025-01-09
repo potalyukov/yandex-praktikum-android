@@ -3,7 +3,8 @@ package com.example.androidpracticumcustomview.ui.theme
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.widget.FrameLayout
+import android.view.ViewGroup
+import kotlin.math.max
 
 /*
 Задание:
@@ -16,25 +17,53 @@ import android.widget.FrameLayout
 
 class CustomContainer @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : FrameLayout(context, attrs) {
+) : ViewGroup(context, attrs) {
 
     init {
         setWillNotDraw(false)
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        // TODO
-        // ...
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        for (i in 0 until childCount) {
+            val child = getChildAt(i)
+
+            val childWidth = child.measuredWidth
+            val childHeight = child.measuredHeight
+
+            val childLeft = width / 2 - childWidth / 2
+            val childTop = if (i == 0) 0 else height - childHeight
+            val childRight = childLeft + childWidth
+            val childBottom = childTop + childHeight
+
+            child.layout(childLeft, childTop, childRight, childBottom)
+        }
     }
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        // TODO
-        // ...
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+
+        var desiredWidth = 0
+        var desiredHeight = 0
+
+        for (i in 0 until childCount) {
+            val child = getChildAt(i)
+
+            measureChild(child, widthMeasureSpec, heightMeasureSpec)
+
+            desiredWidth = max(desiredWidth, child.measuredWidth)
+            desiredHeight += child.measuredHeight
+        }
+
+        // Устанавливаем размер ViewGroup
+        setMeasuredDimension(
+            resolveSize(desiredWidth, widthMeasureSpec),
+            resolveSize(desiredHeight, heightMeasureSpec)
+        )
     }
 
     override fun addView(child: View) {
-        // TODO
-        // ...
+        if (childCount == 2) {
+            throw IllegalStateException("CustomContainer can have two elements max")
+        }
+        super.addView(child)
     }
 }
