@@ -24,11 +24,11 @@ class MainActivity : ComponentActivity() {
 
         //Раскомментируйте нужный вариант
 
-        startXmlPracticum() // «традиционный» android (XML)
+        //startXmlPracticum() // «традиционный» android (XML)
 
-        /*setContent { // Jetpack Compose
+        setContent { // Jetpack Compose
            MainScreen()
-        }*/
+        }
     }
 
     private fun startXmlPracticum() {
