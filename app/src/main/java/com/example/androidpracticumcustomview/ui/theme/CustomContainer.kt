@@ -15,6 +15,8 @@ import kotlin.math.max
 Предусмотрите параметризацию длительности анимации.
  */
 
+private const val maxElements = 2
+
 class CustomContainer @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : ViewGroup(context, attrs) {
@@ -30,7 +32,7 @@ class CustomContainer @JvmOverloads constructor(
             val childWidth = child.measuredWidth
             val childHeight = child.measuredHeight
 
-            val childLeft = width / 2 - childWidth / 2
+            val childLeft = width / maxElements - childWidth / maxElements
             val childTop = if (i == 0) 0 else height - childHeight
             val childRight = childLeft + childWidth
             val childBottom = childTop + childHeight
@@ -60,7 +62,7 @@ class CustomContainer @JvmOverloads constructor(
     }
 
     override fun addView(child: View) {
-        if (childCount == 2) {
+        if (childCount == maxElements) {
             throw IllegalStateException("CustomContainer can have two elements max")
         }
 
