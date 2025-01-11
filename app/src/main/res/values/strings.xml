@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">android practicum custom view</string>
+    <string name="simple_text">Simple text</string>
+    <string name="button_text">I\'m a button</string>
+    <string name="first_text">first text</string>
+    <string name="second_text">second text\nsecond text\nsecond text</string>
+    <string name="third_text">third text</string>
 </resources>

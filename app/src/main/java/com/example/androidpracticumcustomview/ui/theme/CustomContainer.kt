@@ -18,7 +18,7 @@ import kotlin.math.max
 private const val maxElements = 2
 
 class CustomContainer @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null
+    context: Context, attrs: AttributeSet? = null, private val animationDurationMillis: Long = 2000
 ) : ViewGroup(context, attrs) {
 
     init {
@@ -77,7 +77,7 @@ class CustomContainer @JvmOverloads constructor(
                 .animate()
                 .y(originalY)
                 .alpha(1f)
-                .setDuration(2000)
+                .setDuration(animationDurationMillis)
                 .start()
         }
 

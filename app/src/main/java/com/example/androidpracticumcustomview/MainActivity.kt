@@ -51,17 +51,17 @@ class MainActivity : ComponentActivity() {
         setContentView(rootContainer)
 
         val firstView = TextView(this).apply {
-            text = "first text"
+            text = context.getString(R.string.first_text)
             setBackgroundColor(getColor(R.color.purple_200))
         }
 
         val secondView = TextView(this).apply {
-            text = "second text\nsecond text\nsecond text"
+            text = context.getString(R.string.second_text)
             setBackgroundColor(getColor(R.color.teal_200))
         }
 
         val thirdView = TextView(this).apply {
-            text = "third text"
+            text = context.getString(R.string.third_text)
             setBackgroundColor(getColor(R.color.purple_200))
         }
 

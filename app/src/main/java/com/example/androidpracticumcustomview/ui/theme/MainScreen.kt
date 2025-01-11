@@ -9,6 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.example.androidpracticumcustomview.R
 
 /*
 Задание:
@@ -25,11 +27,11 @@ fun MainScreen() {
         ) {
             CustomContainerCompose(
                 firstChild = {
-                    Text("Simple text")
+                    Text(stringResource(R.string.simple_text))
                 },
                 secondChild = {
                     Button({}) {
-                        Text("I'm a button")
+                        Text(stringResource(R.string.button_text))
                     }
                 }
             )
