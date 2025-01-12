@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -38,9 +41,9 @@ fun CustomContainerCompose(
     val secondAlpha = remember { Animatable(0f) }
     val secondOffsetY = remember { Animatable(0f) }
 
-    var parentHeight = 0f
-    var firstHeight = 0f
-    var secondHeight = 0f
+    var parentHeight by remember { mutableFloatStateOf(0f) }
+    var firstHeight by remember { mutableFloatStateOf(0f) }
+    var secondHeight by remember { mutableFloatStateOf(0f) }
 
     LaunchedEffect(Unit) {
         launch {
