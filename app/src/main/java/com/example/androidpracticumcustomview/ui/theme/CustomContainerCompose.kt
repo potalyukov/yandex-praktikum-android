@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /*
@@ -31,7 +32,8 @@ import kotlinx.coroutines.launch
 fun CustomContainerCompose(
     firstChild: @Composable (() -> Unit)?,
     secondChild: @Composable (() -> Unit)?,
-    animationDurationMillis: Int = 2000
+    alphaDurationMillis: Int = 2000,
+    offsetDurationMillis: Int = 5000
 ) {
     val density = LocalDensity.current.density
 
@@ -47,17 +49,20 @@ fun CustomContainerCompose(
 
     LaunchedEffect(Unit) {
         launch {
-            firstAlpha.animateTo(targetValue = 1f, tween(animationDurationMillis))
-            secondAlpha.animateTo(targetValue = 1f, tween(animationDurationMillis))
+            firstAlpha.animateTo(targetValue = 1f, tween(alphaDurationMillis))
+            secondAlpha.animateTo(targetValue = 1f, tween(alphaDurationMillis))
         }
         launch {
             firstOffsetY.animateTo(
                 targetValue = -parentHeight / 2 + firstHeight / 2,
-                tween(animationDurationMillis)
+                tween(offsetDurationMillis)
             )
+        }
+        launch {
+            delay(alphaDurationMillis.toLong())
             secondOffsetY.animateTo(
                 targetValue = parentHeight / 2f - secondHeight / 2,
-                tween(animationDurationMillis)
+                tween(offsetDurationMillis),
             )
         }
     }
